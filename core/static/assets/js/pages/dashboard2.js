@@ -14,6 +14,11 @@ $(function () {
 
   // Get context with jQuery - using jQuery's .get() method.
   var salesChartCanvas = $('#salesChart').get(0).getContext('2d')
+  var salesChartCanvas2 = $('#salesChart2').get(0).getContext('2d')
+  var salesChartCanvas3 = $('#salesChart3').get(0).getContext('2d')
+  var salesChartCanvas4 = $('#salesChart4').get(0).getContext('2d')
+  var salesChartCanvas5 = $('#salesChart5').get(0).getContext('2d')
+  var salesChartCanvas6 = $('#salesChart6').get(0).getContext('2d')
 
   var salesChartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -66,6 +71,42 @@ $(function () {
   // This will get the first returned node in the jQuery collection.
   // eslint-disable-next-line no-unused-vars
   var salesChart = new Chart(salesChartCanvas, {
+    type: 'line',
+    data: salesChartData,
+    options: salesChartOptions
+  }
+  )
+
+  var salesChart2 = new Chart(salesChartCanvas2, {
+    type: 'line',
+    data: salesChartData,
+    options: salesChartOptions
+  }
+  )
+
+  var salesChart3 = new Chart(salesChartCanvas3, {
+    type: 'line',
+    data: salesChartData,
+    options: salesChartOptions
+  }
+  )
+
+
+  var salesChart4 = new Chart(salesChartCanvas4, {
+    type: 'line',
+    data: salesChartData,
+    options: salesChartOptions
+  }
+  )
+
+  var salesChart5 = new Chart(salesChartCanvas5, {
+    type: 'line',
+    data: salesChartData,
+    options: salesChartOptions
+  }
+  )
+
+  var salesChart6 = new Chart(salesChartCanvas6, {
     type: 'line',
     data: salesChartData,
     options: salesChartOptions
