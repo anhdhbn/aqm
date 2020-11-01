@@ -11,4 +11,4 @@ gunicorn
 whitenoise
 python-dotenv
 django-heroku
-rest_framework
+djangorestframework
