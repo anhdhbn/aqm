@@ -145,8 +145,9 @@ $(function () {
   var pm1ChartCanvas = $('#pm1Chart').get(0).getContext('2d')
   var pm25ChartCanvas = $('#pm25Chart').get(0).getContext('2d')
   var pm10ChartCanvas = $('#pm10Chart').get(0).getContext('2d')
+  var windspeedChartCanvas = $('#windspeedChart').get(0).getContext('2d')
 
-  var tempChart, humidityChart, pressureChart, pm1Chart, pm25Chart, pm10Chart;
+  var tempChart, humidityChart, pressureChart, pm1Chart, pm25Chart, pm10Chart, windspeedChart;
 
   function distroyAll(){
     if(tempChart != null) tempChart.destroy();
@@ -155,6 +156,8 @@ $(function () {
     if(pm1Chart != null) pm1Chart.destroy();
     if(pm25Chart != null) pm25Chart.destroy();
     if(pm10Chart != null) pm10Chart.destroy();
+    if(pm10Chart != null) pm10Chart.destroy();
+    if(windspeedChart != null) windspeedChart.destroy();
   }
 
   function fetchData(type='all'){
@@ -204,7 +207,13 @@ $(function () {
           options: createOptions(`PM10: ${obj.labels[0]} - ${obj.labels[obj.labels.length-1]}`)
         }
         )
-
+        
+        windspeedChart = new Chart(windspeedChartCanvas, {
+          type: 'line',
+          data: createChartData(obj.labels, obj.windspeed, "Tốc độ gió"),
+          options: createOptions(`Tốc độ gió: ${obj.labels[0]} - ${obj.labels[obj.labels.length-1]}`)
+        }
+        )
       },
       error: function(err) {
         console.log(err)

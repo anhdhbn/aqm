@@ -9,5 +9,6 @@ class Data(models.Model):
     pm1 = models.FloatField(blank=False, null=False)
     pm25 = models.FloatField(blank=False, null=False)
     pm10 = models.FloatField(blank=False, null=False)
+    windspeed = models.FloatField(blank=False, null=False, default=0)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     created_date = models.DateField(auto_now_add=True, editable=False) #auto_now 
