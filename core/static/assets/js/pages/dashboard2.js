@@ -25,6 +25,7 @@ $(function () {
     obj.pm1 = []
     obj.pm25 = []
     obj.pm10 = []
+    obj.windspeed = []
     for(let i = 0; i < data.length; i++){
       let tmp = data[i];
       obj.labels.push(tmp.created_date);
@@ -34,6 +35,7 @@ $(function () {
       obj.pm1.push(tmp.pm1);
       obj.pm25.push(tmp.pm25);
       obj.pm10.push(tmp.pm10);
+      obj.windspeed.push(tmp.windspeed)
     }
     return obj
   }
@@ -207,13 +209,14 @@ $(function () {
           options: createOptions(`PM10: ${obj.labels[0]} - ${obj.labels[obj.labels.length-1]}`)
         }
         )
-        
+        console.log(obj.windSpeed)
         windspeedChart = new Chart(windspeedChartCanvas, {
           type: 'line',
           data: createChartData(obj.labels, obj.windspeed, "Tốc độ gió"),
           options: createOptions(`Tốc độ gió: ${obj.labels[0]} - ${obj.labels[obj.labels.length-1]}`)
         }
         )
+        
       },
       error: function(err) {
         console.log(err)
@@ -222,81 +225,6 @@ $(function () {
   }
   fetchData()
 
-
-  var salesChartData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-      {
-        fill: false,
-        label: 'Digital Goods',
-        backgroundColor: 'rgba(60,141,188,0.9)',
-        borderColor: 'rgba(60,141,188,0.8)',
-        pointRadius: false,
-        pointColor: '#3b8bba',
-        pointStrokeColor: 'rgba(60,141,188,1)',
-        pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(60,141,188,1)',
-        data: [28, 48, 40, 19, 86, 27, 90]
-      },
-      {
-        fill: false,
-        label: 'Electronics',
-        backgroundColor: 'rgba(210, 214, 222, 1)',
-        borderColor: 'rgba(210, 214, 222, 1)',
-        pointRadius: false,
-        pointColor: 'rgba(210, 214, 222, 1)',
-        pointStrokeColor: '#c1c7d1',
-        pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(220,220,220,1)',
-        data: [65, 59, 80, 81, 56, 55, 40]
-      }
-    ]
-  }
-
-  // This will get the first returned node in the jQuery collection.
-  // eslint-disable-next-line no-unused-vars
-  // var tempChart = new Chart(tempChartCanvas, {
-  //   type: 'line',
-  //   data: createChartData(['January', 'February', 'March', 'April', 'May', 'June', 'July'], [28, 48, 40, 19, 86, 27, 90], "Nhiệt độ"),
-  //   options: createOptions("Nhiệt độ: 01/01/2018 - 30/10/2020")
-  // }
-  // )
-  // humidityChart.destroy();
-  // humidityChart = new Chart(humidityChartCanvas, {
-  //   type: 'line',
-  //   data: salesChartData,
-  //   options: createOptions("Độ ẩm: 01/01/2018 - 30/10/2020")
-  // }
-  // )
-
-  // var pressureChart = new Chart(pressureChartCanvas, {
-  //   type: 'line',
-  //   data: salesChartData,
-  //   options: createOptions("Áp suât: 01/01/2018 - 30/10/2020")
-  // }
-  // )
-
-
-  // var pm1Chart = new Chart(pm1ChartCanvas, {
-  //   type: 'line',
-  //   data: salesChartData,
-  //   options: createOptions("PM1: 01/01/2018 - 30/10/2020")
-  // }
-  // )
-
-  // var pm25Chart = new Chart(pm25ChartCanvas, {
-  //   type: 'line',
-  //   data: salesChartData,
-  //   options: createOptions("PM2.5: 01/01/2018 - 30/10/2020")
-  // }
-  // )
-
-  // var pm10Chart = new Chart(pm10ChartCanvas, {
-  //   type: 'line',
-  //   data: salesChartData,
-  //   options: createOptions("PM10: 01/01/2018 - 30/10/2020")
-  // }
-  // )
 
   //---------------------------
   // - END MONTHLY SALES CHART -

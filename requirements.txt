@@ -12,3 +12,4 @@ whitenoise
 python-dotenv
 django-heroku
 djangorestframework
+paho-mqtt
