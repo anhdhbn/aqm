@@ -6,7 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 import os
 from decouple import config
 from unipath import Path
-# import django_heroku
+import django_heroku
 from dotenv import load_dotenv
 from pathlib import Path  # Python 3.6+ only
 env_path = Path('.') / '.env'
@@ -139,4 +139,4 @@ STATICFILES_DIRS = (
 )
 #############################################################
 #############################################################
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
