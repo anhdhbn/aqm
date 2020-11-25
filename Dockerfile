@@ -9,6 +9,7 @@ COPY app app
 COPY authentication authentication
 COPY core core
 COPY data data
+COPY mqttclient mqttclient
 
 
 # RUN python manage.py makemigrations
