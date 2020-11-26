@@ -24,6 +24,7 @@ def on_message(client, userdata, msg):
                         data[key] = 0
             if(data["pressure"] <= 0 or data["windSpeed"] <= 0): return
             else:
+                if k == "device": continue
                 if(data[k] <= 0): data[k] = prev[k]
                 else: prev[k] = data[k]
         print(data)
