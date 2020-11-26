@@ -18,12 +18,15 @@ def on_message(client, userdata, msg):
     if(msg.topic == topic):
         data = json.loads(msg.payload.decode("utf-8"))
         for k in data.keys():
-            if("pressure" in data.keys() and "windSpeed" in data.keys()):
-                if(data["pressure"] <= 0 or data["windSpeed"] <= 0): return
-                else:
-                    if(data[k] <= 0): data[k] = prev[k]
-                    else: prev[k] = data[k]
-
+            for key in keys:
+                if key not in data.keys():
+                    if key != "device":
+                        data[key] = 0
+            if(data["pressure"] <= 0 or data["windSpeed"] <= 0): return
+            else:
+                if(data[k] <= 0): data[k] = prev[k]
+                else: prev[k] = data[k]
+        print(data)
         tmp = Data.objects.create(
             temp=data["temp"], 
             humidity=data["humidity"], 
