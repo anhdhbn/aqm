@@ -1,3 +1,4 @@
+import os
 import paho.mqtt.client as mqtt
 
 topic = "AQM/hub1/box1"
@@ -44,4 +45,4 @@ client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect("14.232.213.49", 1883, 60)
+client.connect(os.getenv("MQTT_HOST", "localhost"), 1883, 60)
