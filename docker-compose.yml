@@ -37,6 +37,7 @@ services:
       - aqm
   redis:
     image: "redis:alpine"
+    command: redis-server --requirepass "${REDIS_PASS}"
     ports:
       - "6379:6379"
     networks:
