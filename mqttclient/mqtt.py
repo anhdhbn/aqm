@@ -1,5 +1,6 @@
 import os
 import paho.mqtt.client as mqtt
+from django.core.cache import cache
 
 topic = "AQM/hub1/box1"
 
@@ -12,6 +13,9 @@ prev = {}
 keys = ["temp", "humidity", "pressure", "windSpeed", "pm1", "pm25", "pm10"]
 for k in keys:
     prev[k] = 0
+    cache.set(k, 0,timeout=None)
+
+
 
 def on_message(client, userdata, msg):
     import json

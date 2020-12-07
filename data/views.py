@@ -25,7 +25,6 @@ from .models import Data
 def query_data(request):
     if request.method == "GET":
         type_get = request.GET.get('type', 'all')
-        print(type_get)
         all_data = Data.objects.all()
         serializer = DataSerializer(all_data, many=True)
         return Response(serializer.data)
