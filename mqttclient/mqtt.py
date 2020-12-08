@@ -14,8 +14,9 @@ keys = ["temp", "humidity", "pressure", "windSpeed", "pm1", "pm25", "pm10"]
 for k in keys:
     prev[k] = 0
     cache.set(k, 0,timeout=None)
+    cache.set(f"realtime_{k}", 0,timeout=None)
 
-
+cache.set("aqm_count", 0,timeout=None)
 
 def on_message(client, userdata, msg):
     import json
@@ -32,17 +33,28 @@ def on_message(client, userdata, msg):
                 if k == "device": continue
                 if(data[k] <= 0): data[k] = prev[k]
                 else: prev[k] = data[k]
-        print(data)
-        tmp = Data.objects.create(
-            temp=data["temp"], 
-            humidity=data["humidity"], 
-            pressure=data["pressure"],
-            windspeed=data["windSpeed"],
-            pm1=data["pm1"],
-            pm25=data["pm25"],
-            pm10=data["pm10"],
-        )
-        tmp.save()
+        
+        for key in keys:
+            if key != "device":
+                cache.set(f"realtime_{key}", data[key],timeout=None)
+                cache.set(key, cache.get(key) + data[key],timeout=None)
+        
+        cache.set("aqm_count", cache.get("aqm_count") + 1,timeout=None)
+        if(cache.get("aqm_count") == 20):
+            tmp = Data.objects.create(
+                temp=cache.get("temp"), 
+                humidity=cache.get("humidity"), 
+                pressure=cache.get("pressure"),
+                windspeed=cache.get("windSpeed"),
+                pm1=cache.get("pm1"),
+                pm25=cache.get("pm25"),
+                pm10=cache.get("pm10"),
+            )
+            tmp.save()
+            for k in keys:
+                cache.set(k, 0,timeout=None)
+            cache.set("aqm_count", 0,timeout=None)
+        
         
 
 client = mqtt.Client()
