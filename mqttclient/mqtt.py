@@ -33,7 +33,6 @@ def on_message(client, userdata, msg):
                 if k == "device": continue
                 if(data[k] <= 0): data[k] = prev[k]
                 else: prev[k] = data[k]
-        
         for key in keys:
             if key != "device":
                 cache.set(f"realtime_{key}", data[key],timeout=None)
