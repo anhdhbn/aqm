@@ -23,12 +23,13 @@ def on_message(client, userdata, msg):
     from data.models import Data
     if(msg.topic == topic):
         data = json.loads(msg.payload.decode("utf-8"))
+        
         for k in data.keys():
             for key in keys:
                 if key not in data.keys():
                     if key != "device":
                         data[key] = 0
-            if(data["pressure"] <= 0 or data["windSpeed"] <= 0): return
+            # if(data["pressure"] <= 0 or data["windSpeed"] <= 0): return
             else:
                 if k == "device": continue
                 if(data[k] <= 0): data[k] = prev[k]
