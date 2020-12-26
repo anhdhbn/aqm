@@ -41,7 +41,7 @@ def on_message(client, userdata, msg):
                 cache.set(key, cache.get(key) + data[key],timeout=None)
         
         cache.set("aqm_count", cache.get("aqm_count") + 1,timeout=None)
-        # print(f"""({cache.get("aqm_count")}), ({cache.get("temp")/cache.get("aqm_count")}), ({cache.get("realtime_temp")})""")
+        print(f"""({cache.get("aqm_count")}), ({cache.get("temp")/cache.get("aqm_count")}), ({cache.get("realtime_temp")})""")
         if(cache.get("aqm_count") >= 20):
             tmp = Data.objects.create(
                 temp=cache.get("temp")/cache.get("aqm_count"), 
