@@ -43,15 +43,15 @@ def on_message(client, userdata, msg):
         cache.set("aqm_count", cache.get("aqm_count") + 1,timeout=None)
         print(f"""({cache.get("aqm_count")}), ({cache.get("temp")/cache.get("aqm_count")}), ({cache.get("realtime_temp")})""")
         count_ = cache.get("aqm_count")
-        if( >= 21):
+        if(count_ >= 21):
             tmp = Data.objects.create(
-                temp=round(cache.get("temp")/count_), 2), 
-                humidity=round(cache.get("humidity")/count_), 2), 
-                pressure=round(cache.get("pressure")/count_), 2),
-                windspeed=round(cache.get("windSpeed")/count_), 2),
-                pm1=round(cache.get("pm1")/count_), 2),
-                pm25=round(cache.get("pm25")/count_), 2),
-                pm10=round(cache.get("pm10")/count_), 2),
+                temp=round(cache.get("temp")/count_, 2), 
+                humidity=round(cache.get("humidity")/count_, 2), 
+                pressure=round(cache.get("pressure")/count_, 2),
+                windspeed=round(cache.get("windSpeed")/count_, 2),
+                pm1=round(cache.get("pm1")/count_, 2),
+                pm25=round(cache.get("pm25")/count_, 2),
+                pm10=round(cache.get("pm10")/count_, 2),
             )
             tmp.save()
             for k in keys:
