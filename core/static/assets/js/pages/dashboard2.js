@@ -61,11 +61,15 @@ function createOptions(title){
       xAxes: [{
         gridLines: {
           display: true
-        }
+        },
       }],
       yAxes: [{
         gridLines: {
           display: true
+        },
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 6
         }
       }]
     }
