@@ -212,7 +212,7 @@ function fetchData(type='all'){
     }
   } )
 }
-fetchData();
+
 
 function fetchRealtimeData(){
   $.ajax({
@@ -232,6 +232,7 @@ function fetchRealtimeData(){
 }
 
 var loopRealtime = setInterval(fetchRealtimeData, 1000);
+var loopData = setInterval(fetchData, 5000);
 
 $(function () {
   'use strict'
