@@ -55,7 +55,7 @@ def on_message(client, userdata, msg):
             tmp.save()
             for k in keys:
                 cache.set(k, 0,timeout=None)
-            cache.set("aqm_count", 0,timeout=None)
+            cache.set("aqm_count", 1,timeout=None)
         
         
 
