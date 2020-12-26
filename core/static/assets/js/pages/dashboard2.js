@@ -69,7 +69,7 @@ function createOptions(title){
         },
         ticks: {
           autoSkip: true,
-          maxTicksLimit: 6
+          maxTicksLimit: 7
         }
       }]
     }
