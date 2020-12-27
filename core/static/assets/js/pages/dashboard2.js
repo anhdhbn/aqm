@@ -234,7 +234,8 @@ function fetchRealtimeData(){
     }
   } )
 }
-
+fetchRealtimeData()
+fetchData()
 var loopRealtime = setInterval(fetchRealtimeData, 1000);
 var loopData = setInterval(fetchData, 5000);
 
