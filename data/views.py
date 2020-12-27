@@ -31,7 +31,7 @@ class DataViewSet(viewsets.ModelViewSet):
     def fetch_data(self, request, *args, **kwargs):
         type_get = request.GET.get('type', 'all').replace("/", "")
         all_data = Data.objects.all().order_by("created_at")
-
+        max_get=50
         startdate = date.today()
         enddate = date.today() + timedelta(days=1)
         if RepresentsInt(type_get):
@@ -50,6 +50,8 @@ class DataViewSet(viewsets.ModelViewSet):
                 elif type_get == "year":
                     startdate = date.today() - timedelta(days=365)
                 all_data = all_data.filter(created_at__range=[startdate, enddate])
+        if(len(all_data) > max_get):
+            all_data = all_data[:max_get]
         serializer = DataSerializer(all_data, many=True)
         return Response(serializer.data)
     

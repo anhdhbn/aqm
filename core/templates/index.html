@@ -15,6 +15,10 @@
 <!-- overlayScrollbars -->
 <link rel="stylesheet" href="/static/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 <!-- Theme style -->
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
 <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
 
 {% endblock stylesheets %}
@@ -728,7 +732,7 @@
                 <div class="p-1 flex-fill" style="overflow: hidden">
                   <!-- Map will be created here -->
                   <div id="world-map-markers" style="height: 325px; overflow: hidden">
-                    <div class="map"></div>
+                    <!-- <div class="map"></div> -->
                   </div>
                 </div>
                 
@@ -977,6 +981,7 @@
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="/static/assets/js/demo.js"></script>
+<script src="/static/assets/js/pages/gg-map.js"></script>
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
