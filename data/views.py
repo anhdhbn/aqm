@@ -36,7 +36,7 @@ class DataViewSet(viewsets.ModelViewSet):
         enddate = date.today() + timedelta(days=1)
         if RepresentsInt(type_get):
             take = int(type_get)
-            all_data = all_data.reverse()[:take].reverse()
+            all_data = reversed(all_data.reverse()[:take])
         else:
             if type_get != "all":
                 if type_get == "day":
@@ -51,7 +51,7 @@ class DataViewSet(viewsets.ModelViewSet):
                     startdate = date.today() - timedelta(days=365)
                 all_data = all_data.filter(created_at__range=[startdate, enddate])
         if(len(all_data) > max_get):
-            all_data = all_data.reverse()[:max_get].reverse()
+            all_data = reversed(all_data.reverse()[:max_get])
         serializer = DataSerializer(all_data, many=True)
         return Response(serializer.data)
     
