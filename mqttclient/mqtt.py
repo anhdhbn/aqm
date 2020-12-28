@@ -24,7 +24,6 @@ def on_message(client, userdata, msg):
     from data.models import Data
     if(msg.topic == topic):
         data = json.loads(msg.payload.decode("utf-8"))
-        
         for k in data.keys():
             for key in keys:
                 if key not in data.keys():

@@ -15,10 +15,6 @@
 <!-- overlayScrollbars -->
 <link rel="stylesheet" href="/static/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 <!-- Theme style -->
-<script
-      src="//maps.googleapis.com/maps/api/js?key=AIzaSyBIwzALxUPNbatRBj3Xi1Uhp0fFzwWNBkE&callback=initMap&libraries=&v=weekly"
-      defer
-    ></script>
 <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
 
 {% endblock stylesheets %}
@@ -153,7 +149,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">PM10</span>
-              <span id="rt_pm100" class="info-box-number">100 <small>&#181;/m<sup>3</sup></small></span>
+              <span id="rt_pm10" class="info-box-number">100 <small>&#181;/m<sup>3</sup></small></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -981,7 +977,7 @@
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="/static/assets/js/demo.js"></script>
-<script src="/static/assets/js/pages/gg-map.js"></script>
+<script src="/static/assets/js/pages/maps.js"></script>
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
@@ -994,5 +990,8 @@
 
 <!-- PAGE SCRIPTS -->
 <script src="/static/assets/js/pages/dashboard2.js"></script>
+
+<script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
 
 {% endblock javascripts %}
