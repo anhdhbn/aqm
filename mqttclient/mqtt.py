@@ -1,6 +1,7 @@
 import os
 import paho.mqtt.client as mqtt
 from django.core.cache import cache
+import requests
 
 topic = "AQM/hub1/box1"
 
@@ -18,6 +19,23 @@ for k in keys:
     cache.set(f"{k}", 0,timeout=None)
 
 cache.set("aqm_count", 0,timeout=None)
+
+
+def fetch_data():
+    data = requests.get("http://api.openweathermap.org/data/2.5/air_pollution?lat=21.03822642791689&lon=105.78270306158598&appid=95ab292a88e0d53656572bc800f33f57")
+    data = data.json()
+    data = data["list"][0]["components"]
+    data = {
+        "so2": data["so2"],
+        "no2": data["no2"],
+        "co": data["co"],
+        "o3": data["o3"],
+    }
+    for key in data.keys():
+        cache.set(f"realtime_{key}", data[key],timeout=None)
+    return data
+    
+fetch_data()
 
 def on_message(client, userdata, msg):
     import json
@@ -43,6 +61,7 @@ def on_message(client, userdata, msg):
         # print(f"""({cache.get("aqm_count")}), ({cache.get("temp")/cache.get("aqm_count")}), ({cache.get("realtime_temp")})""")
         count_ = cache.get("aqm_count")
         if(count_ >= 21):
+            data = fetch_data()
             tmp = Data.objects.create(
                 temp=round(cache.get("temp")/count_, 2), 
                 humidity=round(cache.get("humidity")/count_, 2), 
@@ -51,13 +70,14 @@ def on_message(client, userdata, msg):
                 pm1=round(cache.get("pm1")/count_, 2),
                 pm25=round(cache.get("pm25")/count_, 2),
                 pm10=round(cache.get("pm10")/count_, 2),
+                **data
             )
             tmp.save()
             for k in keys:
                 cache.set(k, 0,timeout=None)
             cache.set("aqm_count", 1,timeout=None)
         
-        
+
 
 client = mqtt.Client()
 client.on_connect = on_connect

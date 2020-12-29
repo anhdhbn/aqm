@@ -75,6 +75,11 @@ class DataViewSet(viewsets.ModelViewSet):
         tmp.pm25=cache.get("realtime_pm25")
         tmp.pm10=cache.get("realtime_pm10")
         
+        tmp.so2 = cache.get("realtime_so2")
+        tmp.no2 = cache.get("realtime_no2")
+        tmp.co = cache.get("realtime_co")
+        tmp.o3 = cache.get("realtime_o3")
+        
         serializer = DataSerializer(tmp, many=False)
         return Response(serializer.data)
 

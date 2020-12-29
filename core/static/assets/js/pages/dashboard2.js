@@ -24,6 +24,12 @@ function clearData(data) {
   obj.pm25 = []
   obj.pm10 = []
   obj.windspeed = []
+
+  obj.so2 = []
+  obj.no2 = []
+  obj.co = []
+  obj.o3 = []
+
   for(let i = 0; i < data.length; i++){
     let tmp = data[i];
     obj.labels.push(tmp.created_date);
@@ -34,6 +40,11 @@ function clearData(data) {
     obj.pm25.push(tmp.pm25);
     obj.pm10.push(tmp.pm10);
     obj.windspeed.push(tmp.windspeed)
+
+    obj.so2.push(tmp.so2)
+    obj.no2.push(tmp.no2)
+    obj.co.push(tmp.co)
+    obj.o3.push(tmp.o3)
   }
   return obj
 }
@@ -142,7 +153,12 @@ var pm25ChartCanvas = $('#pm25Chart').get(0).getContext('2d')
 var pm10ChartCanvas = $('#pm10Chart').get(0).getContext('2d')
 var windspeedChartCanvas = $('#windspeedChart').get(0).getContext('2d')
 
-var tempChart, humidityChart, pressureChart, pm1Chart, pm25Chart, pm10Chart, windspeedChart;
+var so2ChartCanvas = $('#so2Chart').get(0).getContext('2d')
+var no2ChartCanvas = $('#no2Chart').get(0).getContext('2d')
+var coChartCanvas = $('#coChart').get(0).getContext('2d')
+var o3ChartCanvas = $('#o3Chart').get(0).getContext('2d')
+
+var tempChart, humidityChart, pressureChart, pm1Chart, pm25Chart, pm10Chart, windspeedChart, so2Chart, no2Chart, coChart, o3Chart;
 
 function distroyAll(){
   if(tempChart != null) tempChart.destroy();
@@ -153,6 +169,11 @@ function distroyAll(){
   if(pm10Chart != null) pm10Chart.destroy();
   if(pm10Chart != null) pm10Chart.destroy();
   if(windspeedChart != null) windspeedChart.destroy();
+
+  if(so2Chart != null) so2Chart.destroy();
+  if(no2Chart != null) no2Chart.destroy();
+  if(coChart != null) coChart.destroy();
+  if(o3Chart != null) o3Chart.destroy();
 }
 
 function fetchData(type='all'){
@@ -209,7 +230,34 @@ function fetchData(type='all'){
         options: createOptions(`Tốc độ gió: ${obj.labels[0]} - ${obj.labels[obj.labels.length-1]}`)
       }
       )
+
+      so2Chart = new Chart(so2ChartCanvas, {
+        type: 'line',
+        data: createChartData(obj.labels, obj.so2, "So2"),
+        options: createOptions(`So2: ${obj.labels[0]} - ${obj.labels[obj.labels.length-1]}`)
+      }
+      )
       
+      no2Chart = new Chart(no2ChartCanvas, {
+        type: 'line',
+        data: createChartData(obj.labels, obj.no2, "No2"),
+        options: createOptions(`No2: ${obj.labels[0]} - ${obj.labels[obj.labels.length-1]}`)
+      }
+      )
+
+      coChart = new Chart(coChartCanvas, {
+        type: 'line',
+        data: createChartData(obj.labels, obj.co, "CO"),
+        options: createOptions(`CO: ${obj.labels[0]} - ${obj.labels[obj.labels.length-1]}`)
+      }
+      )
+      
+      o3Chart = new Chart(o3ChartCanvas, {
+        type: 'line',
+        data: createChartData(obj.labels, obj.no2, "O3"),
+        options: createOptions(`O3: ${obj.labels[0]} - ${obj.labels[obj.labels.length-1]}`)
+      }
+      )
     },
     error: function(err) {
       console.log(err)
@@ -228,6 +276,11 @@ function fetchRealtimeData(){
       $('#rt_pm1').html(`${data.pm1} <small>&#181;/m<sup>3</sup></small>`);
       $('#rt_pm25').html(`${data.pm25} <small>&#181;/m<sup>3</sup></small>`);
       $('#rt_pm10').html(`${data.pm10} <small>&#181;/m<sup>3</sup></small>`);
+
+      $('#rt_so2').html(`${data.so2} <small>&#181;/m<sup>3</sup></small>`);
+      $('#rt_no2').html(`${data.no2} <small>&#181;/m<sup>3</sup></small>`);
+      $('#rt_co').html(`${data.co} <small>&#181;/m<sup>3</sup></small>`);
+      $('#rt_o3').html(`${data.o3} <small>&#181;/m<sup>3</sup></small>`);
     },
     error: function(err) {
       console.log(err)
@@ -238,6 +291,16 @@ fetchRealtimeData()
 fetchData()
 var loopRealtime = setInterval(fetchRealtimeData, 1000);
 var loopData = setInterval(fetchData, 5000);
+
+$('#direct-chat-messages').append(`<div class="direct-chat-msg">
+<div class="direct-chat-infos clearfix">
+  <span class="direct-chat-name float-left">Server</span>
+  <span class="direct-chat-timestamp float-right">${"23 Jan 2:00 pm"}</span>
+</div>
+<div class="direct-chat-text">
+  ${"Bụi mịn cao"}
+</div>
+</div>`);
 
 $(function () {
   'use strict'
