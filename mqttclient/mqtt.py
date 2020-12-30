@@ -22,7 +22,7 @@ cache.set("aqm_count", 0,timeout=None)
 
 
 def fetch_data():
-    data = requests.get("http://api.openweathermap.org/data/2.5/air_pollution?lat=21.03822642791689&lon=105.78270306158598&appid=95ab292a88e0d53656572bc800f33f57")
+    data = requests.get("http://api.openweathermap.org/data/2.5/air_pollution?lat=21.047462&lon=105.800822&appid=95ab292a88e0d53656572bc800f33f57")
     data = data.json()
     data = data["list"][0]["components"]
     data = {
@@ -34,7 +34,7 @@ def fetch_data():
     for key in data.keys():
         cache.set(f"realtime_{key}", data[key],timeout=None)
     return data
-    
+
 fetch_data()
 
 def on_message(client, userdata, msg):
