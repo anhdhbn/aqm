@@ -79,6 +79,9 @@ class DataViewSet(viewsets.ModelViewSet):
         tmp.no2 = cache.get("realtime_no2")
         tmp.co = cache.get("realtime_co")
         tmp.o3 = cache.get("realtime_o3")
+
+        tmp.no = cache.get("realtime_no")
+        tmp.nh3 = cache.get("realtime_nh3")
         
         serializer = DataSerializer(tmp, many=False)
         return Response(serializer.data)

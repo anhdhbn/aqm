@@ -30,6 +30,9 @@ function clearData(data) {
   obj.co = []
   obj.o3 = []
 
+  obj.no = []
+  obj.nh3 = []
+
   for(let i = 0; i < data.length; i++){
     let tmp = data[i];
     obj.labels.push(tmp.created_date);
@@ -45,6 +48,9 @@ function clearData(data) {
     obj.no2.push(tmp.no2)
     obj.co.push(tmp.co)
     obj.o3.push(tmp.o3)
+
+    obj.no.push(tmp.no)
+    obj.nh3.push(tmp.nh3)
   }
   return obj
 }
@@ -158,7 +164,10 @@ var no2ChartCanvas = $('#no2Chart').get(0).getContext('2d')
 var coChartCanvas = $('#coChart').get(0).getContext('2d')
 var o3ChartCanvas = $('#o3Chart').get(0).getContext('2d')
 
-var tempChart, humidityChart, pressureChart, pm1Chart, pm25Chart, pm10Chart, windspeedChart, so2Chart, no2Chart, coChart, o3Chart;
+var noChartCanvas = $('#noChart').get(0).getContext('2d')
+var nh3ChartCanvas = $('#nh3Chart').get(0).getContext('2d')
+
+var tempChart, humidityChart, pressureChart, pm1Chart, pm25Chart, pm10Chart, windspeedChart, so2Chart, no2Chart, coChart, o3Chart, noChart, nh3Chart;
 
 function distroyAll(){
   if(tempChart != null) tempChart.destroy();
@@ -174,6 +183,9 @@ function distroyAll(){
   if(no2Chart != null) no2Chart.destroy();
   if(coChart != null) coChart.destroy();
   if(o3Chart != null) o3Chart.destroy();
+
+  if(noChart != null) noChart.destroy();
+  if(nh3Chart != null) nh3Chart.destroy();
 }
 
 function fetchData(type='all'){
@@ -258,6 +270,20 @@ function fetchData(type='all'){
         options: createOptions(`O3: ${obj.labels[0]} - ${obj.labels[obj.labels.length-1]}`)
       }
       )
+
+      noChart = new Chart(noChartCanvas, {
+        type: 'line',
+        data: createChartData(obj.labels, obj.no2, "NO"),
+        options: createOptions(`NO: ${obj.labels[0]} - ${obj.labels[obj.labels.length-1]}`)
+      }
+      )
+
+      nh3Chart = new Chart(nh3ChartCanvas, {
+        type: 'line',
+        data: createChartData(obj.labels, obj.no2, "NH3"),
+        options: createOptions(`NH3: ${obj.labels[0]} - ${obj.labels[obj.labels.length-1]}`)
+      }
+      )
     },
     error: function(err) {
       console.log(err)
@@ -281,6 +307,9 @@ function fetchRealtimeData(){
       $('#rt_no2').html(`${data.no2} <small>&#181;/m<sup>3</sup></small>`);
       $('#rt_co').html(`${data.co} <small>&#181;/m<sup>3</sup></small>`);
       $('#rt_o3').html(`${data.o3} <small>&#181;/m<sup>3</sup></small>`);
+      
+      $('#rt_no').html(`${data.no} <small>&#181;/m<sup>3</sup></small>`);
+      $('#rt_nh3').html(`${data.nh3} <small>&#181;/m<sup>3</sup></small>`);
     },
     error: function(err) {
       console.log(err)

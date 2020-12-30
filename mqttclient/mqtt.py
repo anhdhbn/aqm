@@ -30,6 +30,8 @@ def fetch_data():
         "no2": data["no2"],
         "co": data["co"],
         "o3": data["o3"],
+        "no": data["no"],
+        "nh3": data["nh3"],
     }
     for key in data.keys():
         cache.set(f"realtime_{key}", data[key],timeout=None)
@@ -41,7 +43,13 @@ def on_message(client, userdata, msg):
     import json
     from data.models import Data
     if(msg.topic == topic):
-        data = json.loads(msg.payload.decode("utf-8"))
+        print(data)
+        data = None
+        try:
+            data = json.loads(msg.payload.decode("utf-8"))
+        except:
+            return
+            
         for k in data.keys():
             for key in keys:
                 if key not in data.keys():
@@ -58,6 +66,7 @@ def on_message(client, userdata, msg):
                 cache.set(key, cache.get(key) + data[key],timeout=None)
         
         cache.set("aqm_count", cache.get("aqm_count") + 1,timeout=None)
+        
         # print(f"""({cache.get("aqm_count")}), ({cache.get("temp")/cache.get("aqm_count")}), ({cache.get("realtime_temp")})""")
         count_ = cache.get("aqm_count")
         if(count_ >= 21):

@@ -16,5 +16,8 @@ class Data(models.Model):
     co = models.FloatField(blank=False, null=False, default=0)
     o3 = models.FloatField(blank=False, null=False, default=0)
 
+    no = models.FloatField(blank=False, null=False, default=0)
+    nh3 = models.FloatField(blank=False, null=False, default=0)
+
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     created_date = models.DateField(auto_now_add=True, editable=False) #auto_now 

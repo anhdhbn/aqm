@@ -17,8 +17,8 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
 
-<script src="//js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
-<script src="//js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="//js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+<script src="//js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script> -->
 {% endblock stylesheets %}
 
 {% block content %}
@@ -205,9 +205,29 @@
               <span class="info-box-text">O3</span>
               <span id="rt_o3" class="info-box-number">0</span>
             </div>
-            <!-- /.info-box-content -->
           </div>
-          <!-- /.info-box -->
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cloud-meatball"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">NO</span>
+              <span id="rt_no" class="info-box-number">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cloud-meatball"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">NH3</span>
+              <span id="rt_nh3" class="info-box-number">0</span>
+            </div>
+          </div>
         </div>
         <!-- /.col -->
       </div>
@@ -857,6 +877,56 @@
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title">NO</h5>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="chart">
+                    <canvas id="noChart" height="250" style="height: 250px;"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title">NH3</h5>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="chart">
+                    <canvas id="nh3Chart" height="250" style="height: 250px;"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Main row -->
       <div class="row">
         <!-- Left col -->
@@ -963,7 +1033,7 @@
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="/static/assets/js/demo.js"></script>
-<script src="/static/assets/js/pages/maps.js"></script>
+<!-- <script src="/static/assets/js/pages/maps.js"></script> -->
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
