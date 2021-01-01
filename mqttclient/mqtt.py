@@ -43,11 +43,11 @@ def on_message(client, userdata, msg):
     import json
     from data.models import Data
     if(msg.topic == topic):
-        print(data)
         data = None
         try:
             data = json.loads(msg.payload.decode("utf-8"))
         except:
+            print(msg.payload.decode("utf-8"))
             return
             
         for k in data.keys():
